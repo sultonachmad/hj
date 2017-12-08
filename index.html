@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>hackjak</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+	  
+	  #legend {
+		font-family: Arial, sans-serif;
+		background: #fff;
+		padding: 10px;
+		margin: 10px;
+		border: 1px solid #000;
+	  }
+    </style>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  </head>
+  <body>
+  <header>
+  
+	<!--Navbar-->
+	<nav class="menutop navbar navbar-light bg-faded fixed-top">
+            <div class="container">
+
+                <!-- Navbar brand -->
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain" aria-controls="navbarMain"
+                    aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                
+
+                <!-- Collapse button -->
+                
+					
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSearch" aria-controls="navbarSearch"
+                    aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-search" aria-hidden="true"></i></button>
+                <a class="navbar-brand" href="#" onclick="addMarkerPointSelf()"><i class="fa fa-users" aria-hidden="true"></i></a>   
+				<a class="navbar-brand" href="#"><i class="fa fa-map-o" aria-hidden="true"></i></a>    				
+                
+                <!-- Collapsible content -->                
+				<div class="collapse navbar-collapse overlay" id="navbarMain">
+                    
+					 <!-- Search form -->
+                      <div class="input-group">   
+                          <span class="form-control">Menu</span>
+                            <span class="input-group-addon" type="button" data-toggle="collapse" data-target="#navbarMain" aria-controls="navbarMain" id="basic-addon1"><i class="fa fa-times" aria-hidden="true"></i></span>                            
+                        </div>
+                    
+                    <!-- Links -->
+                    <ul class="navbar-nav ml-auto">						
+                        
+                        <!-- Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<i class="fa fa-list" aria-hidden="true"></i>Kategori
+							</a>
+                            <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="#">Gedung Pemda</a>
+                                <a class="dropdown-item" href="#">Mall</a>
+                                <a class="dropdown-item" href="#">Rumah Ibadah</a>
+                                <a class="dropdown-item" href="#">Taman</a>
+                            </div>
+                        </li>                       
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fa fa-file" aria-hidden="true"></i>Artikel</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fa fa-question-circle-o" aria-hidden="true"></i>FAQ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fa fa-question-circle-o" aria-hidden="true"></i>Hubungi Kami</a>
+                        </li>
+                        
+						
+                    </ul>
+                    <!-- Links -->                
+                    
+				
+				</div>
+                
+				<div class="collapse navbar-collapse overlay" id="navbarSearch">
+                    
+					 <!-- Search form -->
+                    <form action="result.html">
+                        <div class="input-group">                        
+                            <span class="input-group-addon" type="button" data-toggle="collapse" data-target="#navbarSearch" aria-controls="navbarSearch" id="basic-addon1"><i class="fa fa-arrow-left" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" placeholder="Search" aria-describedby="basic-addon1">
+                        </div>
+                    </form>
+                    
+                    Pencarian Populer
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="#">Musholla</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Toilet</a></li>
+                        <li class="nav-item" ><a class="nav-link" href="#">Pasar</a></li>
+                    </ul>
+				
+				</div>
+                
+				<div class="collapse navbar-collapse overlay" id="navbarUser">
+                    
+					 <!-- Search form -->
+                      <div class="input-group">   
+                          <span class="form-control">Profile</span>
+                            <span class="input-group-addon" type="button" data-toggle="collapse" data-target="#navbarUser" aria-controls="navbarUser" id="basic-addon1"><i class="fa fa-times" aria-hidden="true"></i></span>                            
+                        </div>
+                    
+                    <!-- Links -->
+                    <ul class="navbar-nav ml-auto">						
+                        
+                        <!-- Dropdown -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fa fa-user-circle" aria-hidden="true"></i>Sulthan</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <div class="notify-container">
+                                    <span class="notify-bubble">5</span>
+                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                 </div>Pesan
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fa fa-map-marker" aria-hidden="true"></i>Kunjungan</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fa fa-heart" aria-hidden="true"></i>Favorit</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i>Keluar</a>
+                        </li>
+                        
+						
+                    </ul>
+                    <!-- Links -->                
+                    
+				
+				</div>
+                
+                
+                <!-- Collapsible content -->
+			</div>
+            
+        </nav>
+    <!--/.Navbar-->
+  
+  </header>
+
+
+  
+    <div id="map" style="margin-top:-200;"></div>
+	<div id="legend">
+	<input type="checkbox" onclick="showHideMarker(this)" value="ibadah">Tempat Ibadah
+	<input type="checkbox" onclick="showHideMarker(this)" value="pemda">Gedung Pemda
+	<input type="checkbox" onclick="showHideMarker(this)" value="pasar">Pasar Jaya
+	</div>
+	
+    <script>
+      // Note: This example requires that you consent to location sharing when
+      // prompted by your browser. If you see the error "The Geolocation service
+      // failed.", it means you probably did not give permission for the browser to
+      // locate you.
+      var map, infoWindow;
+	  var markersPemda = [];
+	  var markersIbadah = [];
+	  var markersPasar = [];
+	  var markersPoints = [];
+	  
+	  var selfLat;
+	  var selfLng;
+	  
+	  var infok3 = "<ul><li><a href='#'>Kebijakan Manajemen gedung</a></li>"+
+	               "<li><a href='#'>Fasilitas kebakaran dan bencana</a></li>"+
+				   "<li><a href='#'>Jalur Evakuasi</a></li>"+
+				   "<li><a href='#'>Laporan zero accident</a></li><ul>";	
+	  
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 17
+        });
+        infoWindow = new google.maps.InfoWindow;
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+		  selfLat = position.coords.latitude;
+		  selfLng = position.coords.longitude;
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('<i class="fa fa-street-view" aria-hidden="true"></i>');
+            infoWindow.open(map);
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+		
+		var legend = document.getElementById('legend');
+		map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
+		
+				
+		//show near by marker
+		//addMarker(-6.407908,106.781474);
+		//addMarkers("http://api.jakarta.go.id/ruang-publik/tempat-ibadah/");
+		//addMarkersPemda("http://api.jakarta.go.id/ruang-publik/gedung-pemda/");
+		
+		
+      }
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+      }
+	  
+	  function showHideMarker(obj){
+		if(obj.checked==true){
+			//add marker
+			
+			 if(obj.value=='pemda'){
+					if(markersPemda.length>0)setMapOnPemda(map);
+					else addMarkersPemda("http://api.jakarta.go.id/ruang-publik/gedung-pemda/");				
+				}
+			 else if(obj.value=='ibadah'){
+					if(markersIbadah.length>0) setMapOnIbadah(map) 
+					else addMarkers("http://api.jakarta.go.id/ruang-publik/tempat-ibadah/");
+				}
+			else if(obj.value=='pasar'){
+					if(markersPasar.length>0)setMapOnPasar(map);
+					else addMarkersPasar("http://api.jakarta.go.id/ruang-publik/pd-pasar-jaya/");				
+				}	
+				
+		  }else{
+			//remove marker
+			if(obj.value=='pemda')setMapOnPemda(null);
+			else if(obj.value=='ibadah')setMapOnIbadah(null) ;
+			else if(obj.value=='pasar')setMapOnPasar(null) ;
+		  }
+	  
+	  }
+	  
+	  function setMapOnPemda(map) {
+        for (var i = 0; i < markersPemda.length; i++) {
+          markersPemda[i].setMap(map);
+        }
+      }
+	  
+	  function setMapOnIbadah(map) {
+        for (var i = 0; i < markersIbadah.length; i++) {
+          markersIbadah[i].setMap(map);
+        }
+      }
+	  function setMapOnPasar(map) {
+        for (var i = 0; i < markersPasar.length; i++) {
+          markersPasar[i].setMap(map);
+        }
+      }
+	  
+	  
+	  function addMarker(lt,lg, judul, tipe){
+	     icon='';
+		 if(tipe=='masjid')icon='images/masjid.png';
+		 if(tipe=='gereja')icon='images/gereja.png';
+		 if(tipe=='wihara')icon='images/wihara.png';
+		 if(tipe=='pura')icon='images/pura.png';
+		 
+	    var myLatLng = {lat: lt, lng: lg};
+		  var marker = new google.maps.Marker({
+			  position: myLatLng,
+			  map: map,
+			  icon:icon,
+			  title: judul
+			});
+		marker.infoWindow = new google.maps.InfoWindow({
+			position : new google.maps.LatLng(lt, lg),
+			content : '<h4>'+judul+'</h4><br/>'+infok3
+	    });
+		google.maps.event.addListener(marker, 'click', function() {
+			marker.infoWindow.open(map);
+			addMarkerPoint(lt,lg);
+	    });
+        markersIbadah.push(marker);
+			
+	  }
+	  
+	  function addMarkers(file){
+	  
+		  $.getJSON(file, function(json) {
+		     for(var i=0;i<json.data.length;i++){
+				 addMarker(json.data[i].location.latitude,json.data[i].location.longitude,json.data[i].nama,json.data[i].tipe);
+			 }
+		  });
+			
+	  }
+	  
+	  function addMarkerPemda(lt,lg, judul, tipe){
+	     icon='images/pemda.png';
+		  var myLatLng = {lat: lt, lng: lg};
+		  var marker = new google.maps.Marker({
+			  position: myLatLng,
+			  map: map,
+			  icon:icon,
+			  title: judul
+			});
+		marker.infoWindow = new google.maps.InfoWindow({
+			position : new google.maps.LatLng(lt, lg),
+			content : '<h4>'+judul+'</h4><br/>'+infok3
+	    });
+		google.maps.event.addListener(marker, 'click', function() {
+			marker.infoWindow.open(map);
+			addMarkerPoint(lt,lg);
+	    });
+		markersPemda.push(marker);
+	  }
+	  
+	  function addMarkersPemda(file){
+	  
+		  $.getJSON(file, function(json) {
+		     for(var i=0;i<json.data.length;i++){
+				 addMarkerPemda(json.data[i].location.latitude,json.data[i].location.longitude,json.data[i].nama_gedung);
+			 }
+		  });
+			
+	  }
+	  
+	  function addMarkerPasar(lt,lg, judul, tipe){
+	     icon='images/pasar.png';
+		  var myLatLng = {lat: lt, lng: lg};
+		  var marker = new google.maps.Marker({
+			  position: myLatLng,
+			  map: map,
+			  icon:icon,
+			  title: '<h4>'+judul+'</h4><br/>'+judul
+			});
+		
+		marker.infoWindow = new google.maps.InfoWindow({
+			position : new google.maps.LatLng(lt, lg),
+			content : '<h4>'+judul+'</h4><br/>'+infok3
+	    });
+		google.maps.event.addListener(marker, 'click', function() {
+			marker.infoWindow.open(map);
+			addMarkerPoint(lt,lg);
+	    });
+		markersPasar.push(marker);	
+	  }
+	  
+	  function addMarkersPasar(file){
+	  
+		  $.getJSON(file, function(json) {
+		     for(var i=0;i<json.data.length;i++){
+				 addMarkerPasar(json.data[i].location.latitude,json.data[i].location.longitude,json.data[i].nama_pasar);
+			 }
+		  });
+			
+	  }
+	  
+	  function addMarkerPointSelf(){
+	  
+		  for (var i = 0; i < markersPoints.length; i++) {
+			  markersPoints[i].setMap(null);
+			}
+	     markersPoints = [];
+		  var myLatLng = {lat: selfLat-0.00020, lng: selfLng-0.00020};
+		  var marker = new google.maps.Marker({
+			  position: myLatLng,
+			  map: map,
+			  
+			});
+		markersPoints.push(marker);	
+	  }
+	  
+	  function addMarkerPoint(lt,lg){
+	  
+		  for (var i = 0; i < markersPoints.length; i++) {
+			  markersPoints[i].setMap(null);
+			}
+	     markersPoints = [];
+		  var myLatLng = {lat: lt-0.00020, lng: lg-0.00020};
+		  var marker = new google.maps.Marker({
+			  position: myLatLng,
+			  map: map,
+			  
+			});
+		markersPoints.push(marker);	
+	  }
+	  
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANpzo3YmHzaRQDjf2-TpPBoZ7JV4xSUs8&callback=initMap">
+    </script>
+	<script src="js/holder.min.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/popper.min.js" ></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+  </body>
+</html>
